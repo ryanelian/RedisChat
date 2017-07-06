@@ -1,16 +1,18 @@
 ﻿import * as ReconnectingWebSocket from 'reconnecting-websocket';
 
 class ChatRoomController implements angular.IController {
+    static $inject = ['$scope'];
 
-    $inject = ['$scope'];
     $scope: angular.IScope;
-
     messages: string[];
     socket: WebSocket;
+
     chat: string;
 
     constructor($scope) {
         this.$scope = $scope;
+        this.messages = [];
+        this.socket = new ReconnectingWebSocket('ws://' + location.host);
     }
 
     submit() {
@@ -27,10 +29,6 @@ class ChatRoomController implements angular.IController {
     }
 
     $onInit() {
-        this.messages = [];
-
-        this.socket = new ReconnectingWebSocket('ws://' + location.host);
-
         this.socket.onopen = e => {
             this.addNewMessage('Chat connection opened.');
         };
