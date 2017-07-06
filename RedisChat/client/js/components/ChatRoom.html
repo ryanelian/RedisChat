@@ -1,0 +1,12 @@
+﻿<div>
+    <p ng-repeat="message in me.messages track by $index" ng-bind="message"></p>
+</div>
+
+<form ng-submit="me.submit()">
+    <div class="input-group">
+        <input class="form-control" ng-model="me.chat" />
+        <div class="input-group-btn">
+            <button class="btn btn-primary" type="submit">Send</button>
+        </div>
+    </div>
+</form>
